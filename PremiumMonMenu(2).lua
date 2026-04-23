@@ -781,31 +781,7 @@ Tabs.Misc:AddButton({
             end
         end
     end)
-    Tabs.Misc:AddButton({
-    Title = "Server Hop",
-    Callback = function()
-        local HttpService = game:GetService("HttpService")
-        local req = (syn and syn.request) or request or http_request or (http and http.request)
-        if req then
-            local url = "https://games.roblox.com/v1/games/" .. tostring(game.PlaceId) .. "/servers/Public?sortOrder=Desc&limit=100"
-            local success, result = pcall(function() return req({Url = url, Method = "GET"}) end)
-            if success and result and result.Body then
-                local data = HttpService:JSONDecode(result.Body)
-                if data and data.data then
-                    local servers = {}
-                    for _, s in ipairs(data.data) do
-                        if type(s) == "table" and s.playing < s.maxPlayers and s.id ~= game.JobId then
-                            table.insert(servers, s.id)
-                        end
-                    end
-                    if #servers > 0 then
-                        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, servers[math.random(1, #servers)], game.Players.LocalPlayer)
-                    end
-                end
-            end
-        end
-    end
-})
+  
     
 -- โยนของ
 --จบ
