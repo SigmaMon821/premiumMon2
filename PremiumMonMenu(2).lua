@@ -120,6 +120,29 @@ local function LoadMainScript()
             end
         end)
     end)
+    local AutoFarmHaki = Tabs.Main:AddToggle("AutoFarmHakiToggle", {
+    Title = "Auto Farm Haki (op)",
+    Default = false
+})
+
+AutoFarmHaki:OnChanged(function()
+    if Options.AutoFarmHakiToggle.Value then
+        task.spawn(function()
+            while Options.AutoFarmHakiToggle.Value do
+                pcall(function()
+                    local args = {
+                        [1] = "On",
+                        [2] = 292
+                    }
+                    local targetRemote = workspace.UserData["User_" .. tostring(player.UserId)].III
+                    targetRemote:FireServer(unpack(args))
+                end)
+                task.wait(0.1)
+            end
+        end)
+    end
+end)
+    
 Tabs.Main:AddToggle("AutoSpawn", {Title = "Auto Spawn", Default = false}):OnChanged(function(v)
     _G.AutoSpawnEnabled = v
     if _G.AutoSpawnEnabled then
