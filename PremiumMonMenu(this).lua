@@ -33,7 +33,7 @@ local function LoadMainScript()
     local TeleportService = game:GetService("TeleportService")
 
     local Window = Fluent:CreateWindow({
-        Title = "YT : MonPhopuakMung 2.0",
+        Title = "YT : MonPhopuakMung ",
         SubTitle = "PaidVersion",
         TabWidth = 160,
         Size = UDim2.fromOffset(580, 360),
@@ -417,7 +417,7 @@ Tabs.Shop:AddToggle("AutoBuyToggle", {
                                             
                                             if not playerGui:FindFirstChild("ShopDrinksPlus") then
                                                 fireclickdetector(npc.Clickable.ClickDetector)
-                                                task.wait(0.6) 
+                                                task.wait(0.3) 
                                             end
                                         end
                                     end
@@ -429,7 +429,7 @@ Tabs.Shop:AddToggle("AutoBuyToggle", {
                                         playerGui.ShopDrinksPlus.Clicked.Retum:FireServer(unpack(args))
                                     end
                                     
-                                    task.wait(0.6)
+                                    task.wait(0.4)
                                 end
                             end
                         end
