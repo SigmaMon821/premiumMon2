@@ -415,7 +415,7 @@ end
 
 Tabs.Shop:AddToggle("AutoDropDrinks", {
     Title = "Auto Drop Drinks",
-    Description = "Auto drop Juice / Cider / Lemonade / Smoothie every 3 sec",
+    Description = "Auto drop Juice / Cider / Lemonade / Smoothie ",
     Default = false,
 }):OnChanged(function(v)
     autoDropDrinks = v
@@ -423,15 +423,15 @@ Tabs.Shop:AddToggle("AutoDropDrinks", {
         dropDrinkThread = task.spawn(function()
             while autoDropDrinks do
                 pcall(dropDrinkItems)
-                task.wait(3)
+                task.wait(0.2)
             end
         end)
     end
 end)
 
 Tabs.Shop:AddButton({
-    Title = "Drop Now (Manual)",
-    Description = "กดเพื่อดรอปทันที",
+    Title = "Drop Now ",
+    Description = "Click For drop",
     Callback = function()
         pcall(dropDrinkItems)
     end,
@@ -439,7 +439,7 @@ Tabs.Shop:AddButton({
 
 Tabs.Shop:AddButton({
     Title = "🔄 Refresh Backpack",
-    Description = "Refresh รายการไอเทมใน Backpack",
+    
     Callback = function()
         local backpack = game.Players.LocalPlayer.Backpack
         local char = game.Players.LocalPlayer.Character
@@ -458,7 +458,7 @@ Tabs.Shop:AddButton({
         Fluent:Notify({
             Title = "🎒 Backpack (" .. #items .. " items)",
             Content = msg,
-            Duration = 6
+            Duration = 1
         })
     end,
 })
