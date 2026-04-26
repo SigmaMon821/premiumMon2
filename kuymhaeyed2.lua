@@ -71,7 +71,7 @@ local function dropDrinkNow()
                 VU:TypeKey(string.char(8)) 
                     end
 
-            task.wait(0.2)
+            task.wait(0.1)
         end)
     end
 end
