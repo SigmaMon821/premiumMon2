@@ -53,11 +53,10 @@ local function dropDrinkNow()
 
     for _, tool in pairs(toDrop) do
         pcall(function()
-            -- Equip tool ก่อน
+            
             hum:EquipTool(tool)
             task.wait(0.1)
 
-            -- หา Drop RemoteEvent ใน tool หรือ ReplicatedStorage
             local dropRemote = tool:FindFirstChild("DropEvent")
                 or tool:FindFirstChild("Drop")
                 or game:GetService("ReplicatedStorage"):FindFirstChild("DropTool", true)
@@ -66,11 +65,11 @@ local function dropDrinkNow()
             if dropRemote and dropRemote:IsA("RemoteEvent") then
                 dropRemote:FireServer(tool)
             else
-                -- Fallback: ใช้ VirtualUser กด Backspace ฝั่ง game engine
+                
                 local VU = game:GetService("VirtualUser")
                 VU:CaptureController()
-                VU:TypeKey(string.char(8)) -- Backspace character code ฝั่ง engine
-            end
+                VU:TypeKey(string.char(8)) 
+                    end
 
             task.wait(0.2)
         end)
