@@ -372,7 +372,7 @@ Tabs.Skill:AddInput("SkillHoldInput", {
 
 Tabs.Skill:AddSection("เลือก Skill Key")
 
-local skillKeys  = { "Z","X","C","V","B","N","F","G","H","J","K","L" }
+local skillKeys  = { "Z","X","C","V","B","N","F","G","H","J","K","L", "Y" , }
 local skillState = {}
 
 for _, key in ipairs(skillKeys) do
