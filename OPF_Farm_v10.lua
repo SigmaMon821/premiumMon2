@@ -63,7 +63,7 @@ local WantedItems = {
 local State = {
     AutoFarm         = false,
     TeleportMode     = "Behind",
-    TeleportOffset   = 3.5,
+    TeleportOffset   = 1,
     FarmMode         = "ทั้งหมด",
     TargetName       = "",
     MaxLv            = 300,
@@ -73,7 +73,7 @@ local State = {
     AutoPickup       = false,
     FollowPlayer     = false,
     FollowMode       = "Behind",
-    FollowOffset     = 2.5,
+    FollowOffset     = 10,
     FollowTarget     = "",
     FollowConnection = nil,
 }
@@ -559,7 +559,7 @@ Tabs.Player:AddDropdown("FollowModeDD", {
 
 Tabs.Player:AddInput("FollowOffsetInput", {
     Title    = "ระยะประกบ (studs)",
-    Default  = "2.5",
+    Default  = "1",
     Numeric  = true,
     Finished = false,
     Callback = function(val)
