@@ -647,7 +647,7 @@ Tabs.Skill:AddDropdown("SkillModeDD", {
 
 Tabs.Skill:AddInput("SkillIntervalInput", {
     Title    = "ความเร็วการกด (วินาที)",
-    Default  = "0.4",
+    Default  = "0.1",
     Numeric  = true,
     Finished = false,
     Callback = function(val)
@@ -669,7 +669,7 @@ Tabs.Skill:AddInput("SkillHoldInput", {
 
 Tabs.Skill:AddSection("เลือก Skill Key")
 
-local skillKeys  = { "Z","X","C","V","B","N","F","G","H","J","K","L" }
+local skillKeys  = { "Z","X","C","V","B","N","F","G","H","J","K", "T" ,"L" }
 local skillState = {}
 
 for _, key in ipairs(skillKeys) do
