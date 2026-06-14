@@ -34,7 +34,7 @@ local State = {
     TeleportMode    = "Behind",
     TeleportOffset  = 3.5,
     FarmMode        = "ทั้งหมด",
-    TargetName      = "",
+    TargetNames     = {},
     MaxLv           = 300,
     TrackConn       = nil,
     LoopWalkSpeed   = false,
@@ -97,8 +97,12 @@ local function IsValidMonster(model)
     end
     local hum = model:FindFirstChildOfClass("Humanoid")
     if not hum or hum.Health <= 0 then return false end
-    if State.FarmMode == "เจาะจง" then return model.Name == State.TargetName end
-    if model.Name:find("Vokun") then return true end
+    if State.FarmMode == "เจาะจง" then
+        for _, name in ipairs(State.TargetNames) do
+            if model.Name == name then return true end
+        end
+        return false
+    end
     return GetMonsterLv(model.Name) <= State.MaxLv
 end
 
@@ -213,12 +217,17 @@ if #monsterNames == 0 then monsterNames = { "ยังไม่พบมอน" 
 
 local MonsterDD = Tabs.Farm:AddDropdown("MonsterNameDD", {
     Title       = "เลือกมอน (โหมดเจาะจง)",
-    Description = "กด Refresh ถ้ายังไม่เห็น",
+    Description = "เลือกได้หลายตัว / กด Refresh ถ้ายังไม่เห็น",
     Values      = monsterNames,
-    Default     = monsterNames[1],
-    Callback    = function(val) State.TargetName = val end,
+    Default     = {},
+    Multi       = true,
+    Callback    = function(val)
+        State.TargetNames = {}
+        for name, selected in pairs(val) do
+            if selected then table.insert(State.TargetNames, name) end
+        end
+    end,
 })
-State.TargetName = monsterNames[1]
 
 Tabs.Farm:AddButton({
     Title    = "Refresh Monster List",
@@ -229,8 +238,7 @@ Tabs.Farm:AddButton({
             return
         end
         MonsterDD:SetValues(newNames)
-        MonsterDD:SetValue(newNames[1])
-        State.TargetName = newNames[1]
+        State.TargetNames = {}
         Fluent:Notify({ Title = "Refresh", Content = "พบมอน " .. #newNames .. " ชนิด", Duration = 3 })
     end,
 })
